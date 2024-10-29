@@ -69,7 +69,7 @@ fun ContainerScreen() {
                 onCloseClick = { drawerState = MenuDrawerState.Closed }
             )
             MainContent(
-                modifier = Modifier.conditionalModifier(4, drawerState),
+                modifier = Modifier.conditionalModifier(5, drawerState),
                 drawerState = drawerState,
                 onDrawerClick = { drawerState = it },
                 navController = navController

@@ -85,6 +85,11 @@ fun Modifier.conditionalModifier(
         label = "Animated Rotation Z"
     )
 
+    val animatedRotationZNegative by animateFloatAsState(
+        targetValue = if (drawerState.isOpened()) 30f else 0f, // Flip 30 degrees
+        label = "Animated Rotation Z"
+    )
+
     // Function to apply shared colored shadow modifier
     fun Modifier.applyShadow(): Modifier {
         return this.shadow(
@@ -116,6 +121,17 @@ fun Modifier.conditionalModifier(
                 rotationY = animatedRotationZ,  // 3D rotation along the Z-axis
                 cameraDistance = 12f * density // Adjust for a more pronounced 3D effect
             )
+            .applyShadow()
+        5 -> this
+            .offset { IntOffset(animatedOffset.roundToPx(), 0) }
+            .scale(scale = animatedScale)
+            .graphicsLayer(
+                rotationY = animatedRotationZNegative,  // 3D rotation along the Z-axis
+                cameraDistance = 12f * density // Adjust for a more pronounced 3D effect
+            )
+            .applyShadow()
+        6 -> this
+            .offset { IntOffset(animatedOffset.roundToPx(), 0) }
             .applyShadow()
 
         else -> this // Default modifier
